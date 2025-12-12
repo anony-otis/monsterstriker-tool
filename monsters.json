@@ -1,0 +1,10 @@
+[
+  {"id":1,"name_zh":"正宗丸α","name_jp":"マサムネα","attr":"火","type":"反射","ss_type":"自強化","max_atk":52000,"friends_type":"超強力"},
+  {"id":2,"name_zh":"安娜斯塔西亞α","name_jp":"アナスタシアα","attr":"火","type":"貫通","ss_type":"超強力","max_atk":48500,"friends_type":"超絕爆破"},
+  {"id":3,"name_zh":"伊麗莎白α","name_jp":"伊麗莎白α","attr":"水","type":"反射","ss_type":"貫通","max_atk":51000,"friends_type":"超強力"},
+  {"id":4,"name_zh":"巴薩拉","name_jp":"バサラ","attr":"木","type":"貫通","ss_type":"鎖鏈","max_atk":49500,"friends_type":"超強力"},
+  {"id":5,"name_zh":"路西法","name_jp":"ルシファー","attr":"闇","type":"反射","ss_type":"爆破","max_atk":55000,"friends_type":"超強力"},
+  {"id":6,"name_zh":"壽限無α","name_jp":"寿限無α","attr":"水","type":"貫通","ss_type":"自強化","max_atk":53000,"friends_type":"超強力"},
+  {"id":7,"name_zh":"索羅門","name_jp":"ソロモン","attr":"木","type":"反射","ss_type":"友情爆破","max_atk":50500,"friends_type":"超絕爆破"},
+  {"id":8,"name_zh":"聖阿莫雷","name_jp":"セントアモーレ","attr":"光","type":"反射","ss_type":"超強力","max_atk":54000,"friends_type":"超強力"}
+]
