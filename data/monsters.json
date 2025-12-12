@@ -1,7 +1,79 @@
 [
-  {"id":1,"name_zh":"正宗丸α","name_jp":"マサムネα","attr":"火","type":"反射","icon":"https://static.monster-strike.com.tw/character/60001.png","rec_fruits":["同族加擊特L","同族加擊特L","同族加擊速特L","熱友撃EL"],"rec_emblem":["對火極","對火極","對將心得"]},
-  {"id":2,"name_zh":"安娜斯塔西亞α","name_jp":"アナスタシアα","attr":"火","type":"貫通","icon":"https://static.monster-strike.com.tw/character/60002.png","rec_fruits":["同族加擊特L","同族加擊特L","同族加擊速特L","熱友撃EL"],"rec_emblem":["對火極","對火極","對兵心得"]},
-  {"id":3,"name_zh":"伊麗莎白α","name_jp":"伊麗莎白α","attr":"水","type":"反射","icon":"https://static.monster-strike.com.tw/character/60003.png","rec_fruits":["同族加擊特L","同族加擊特L","同族加擊速特L","熱友撃EL"],"rec_emblem":["對水極","對水極","對將心得"]},
-  {"id":4,"name_zh":"巴薩拉","name_jp":"バサラ","attr":"木","type":"貫通","icon":"https://static.monster-strike.com.tw/character/12345.png","rec_fruits":["同族加擊特L","同族加擊特L","同族加擊速特L","熱友撃EL"],"rec_emblem":["對木極","對木極","對兵心得"]},
-  {"id":5,"name_zh":"路西法","name_jp":"ルシファー","attr":"闇","type":"反射","icon":"https://static.monster-strike.com.tw/character/666.png","rec_fruits":["同族加擊特L","同族加擊特L","同族加擊速特L","熱友撃EL"],"rec_emblem":["對闇極","對闇極","對將心得"]}
+  {
+    "name_jp": "ジャックザリッパーα",
+    "name_zh": "",
+    "attr": "木",
+    "type_of_shot": "貫通",
+    "passive": ["超ADW", "超AW", "超MSL", "友情×2"],
+    "race": "亜人",
+    "luck_skills": ["クリティカル"],
+    "icon": "https://img.gamewith.jp/article_tools/monst/gacha/jyakkuzarippaaarufa_j.jpg",
+    "source": "https://xn--eckwa2aa3a9c8j8bve9d.gamewith.jp/article/show/531765"
+  },
+  {
+    "name_jp": "パスカルα",
+    "name_zh": "",
+    "attr": "水",
+    "type_of_shot": "反射",
+    "passive": ["超AGB", "AW", "アンチ減速壁", "超LSM", "連撃キラーM"],
+    "race": "亜人",
+    "luck_skills": ["ガイド"],
+    "icon": "https://img.gamewith.jp/article_tools/monst/gacha/pasukalarufa_j.jpg",
+    "source": "https://xn--eckwa2aa3a9c8j8bve9d.gamewith.jp/article/show/531767"
+  },
+  {
+    "name_jp": "ジャヒーα",
+    "name_zh": "",
+    "attr": "闇",
+    "type_of_shot": "貫通",
+    "passive": ["AGB", "超ADW", "超アンチ減速壁", "回復L", "超LSM"],
+    "race": "妖精",
+    "luck_skills": ["シールド"],
+    "icon": "https://img.gamewith.jp/article_tools/monst/gacha/jahiiarufa_j.jpg",
+    "source": "https://xn--eckwa2aa3a9c8j8bve9d.gamewith.jp/article/show/531766"
+  },
+  {
+    "name_jp": "セントアモーレ",
+    "name_zh": "",
+    "attr": "光",
+    "type_of_shot": "貫通",
+    "passive": ["MSL", "アンチ減速壁", "ラック弱点キラー", "超LS"],
+    "race": "幻妖",
+    "luck_skills": ["ガイド"],
+    "icon": "https://img.gamewith.jp/article_tools/monst/gacha/sentoamore_s.jpg",
+    "source": "https://xn--eckwa2aa3a9c8j8bve9d.gamewith.jp/article/show/533445"
+  },
+  {
+    "name_jp": "堀井まさね",
+    "name_zh": "",
+    "attr": "火",
+    "type_of_shot": "貫通",
+    "passive": ["AW", "アンチ魔法陣", "アンチ減速壁", "Cキラー"],
+    "race": "サムライ",
+    "luck_skills": ["シールド"],
+    "icon": "https://img.gamewith.jp/article_tools/monst/gacha/horiimasane_s.jpg",
+    "source": "https://xn--eckwa2aa3a9c8j8bve9d.gamewith.jp/article/show/531804"
+  },
+  {
+    "name_jp": "オーリック",
+    "name_zh": "",
+    "attr": "木",
+    "type_of_shot": "反射",
+    "passive": ["MSM", "アンチ減速壁", "アンチ転送壁", "機鉱封じ"],
+    "race": "亜人",
+    "luck_skills": ["シールド"],
+    "icon": "https://img.gamewith.jp/article_tools/monst/gacha/oorikku_s.jpg",
+    "source": "https://xn--eckwa2aa3a9c8j8bve9d.gamewith.jp/article/show/531805"
+  },
+  {
+    "name_jp": "イソックリーパー",
+    "name_zh": "",
+    "attr": "水",
+    "type_of_shot": "貫通",
+    "passive": ["アンチ魔法陣"],
+    "race": "幻獣",
+    "luck_skills": ["ガイド"],
+    "icon": "https://img.gamewith.jp/article_tools/monst/gacha/isokkuriipaa_s.jpg",
+    "source": "https://xn--eckwa2aa3a9c8j8bve9d.gamewith.jp/article/show/531806"
+  }
 ]
