@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025最新 怪物彈珠轟絶爆絶隊伍配置工具｜高難配裝一鍵生成</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#222;color:#fff;padding:20px;}
+    .card{background:#333;padding:15px;margin:10px 0;border-radius:10px;display:flex;align-items:center;gap:15px;}
+    img{width:60px;height:60px;border-radius:50%;border:3px solid gold;}
+    select, button{padding:12px;font-size:16px;margin:5px;}
+    #result .monster{margin:15px 0;padding:15px;background:#444;border-radius:10px;}
+    .fruits span{background:#c40;color:#fff;padding:5px 10px;margin:3px;display:inline-block;border-radius:5px;}
+    .emblems span{background:#08f;color:#fff;padding:5px 10px;margin:3px;display:inline-block;border-radius:5px;}
+  </style>
+</head>
+<body>
+  <h1>怪物彈珠 高級配裝計算器</h1>
+  <p>選擇關卡 → 選擇四隻怪物 → 即時顯示個別最佳果實與紋章</p>
+
+  <div class="card">
+    <img id="questIcon" src="" alt="關卡">
+    <select id="quest" onchange="calc()"></select>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div><img id="icon1" src=""><select id="m1" onchange="calc()"></select></div>
+    <div><img id="icon2" src=""><select id="m2" onchange="calc()"></select></div>
+    <div><img id="icon3" src=""><select id="m3" onchange="calc()"></select></div>
+    <div><img id="icon4" src=""><select id="m4" onchange="calc()"></select></div>
+  </div>
+
+  <button onclick="calc()" style="padding:15px 30px;font-size:18px;margin:20px 0;">生成推薦配裝</button>
+
+  <div id="result">載入中…</div>
+
+  <script>
+    let DB = {monsters:[], quests:[]};
+
+    async function load() {
+      try {
+        const [m,q] = await Promise.all([
+          fetch('data/monsters.json').then(r=>r.json()),
+          fetch('data/quests.json').then(r=>r.json())
+        ]);
+        DB.monsters = m; DB.quests = q;
+
+        document.getElementById('quest').innerHTML = '<option value="">請選擇關卡</option>' + 
+          q.map(x=>`<option value="${x.id}">${x.name}</option>`).join('');
+        document.getElementById('quest').selectedIndex = 1;
+
+        const opts = '<option value="">請選擇怪物</option>' + 
+          m.map(x=>`<option value="${x.id}">${x.name_zh} (${x.attr}${x.type})</option>`).join('');
+        document.querySelectorAll('#m1,#m2,#m3,#m4').forEach((s,i)=>{s.innerHTML=opts; s.selectedIndex=i+1;});
+
+        calc();
+      } catch(e) {
+        document.getElementById('result').innerHTML = `<p style="color:red">載入失敗！<br>請確認 data/monsters.json 與 data/quests.json 已上傳</p>`;
+      }
+    }
+
+    function calc() {
+      const qid = document.getElementById('quest').value;
+      if (!qid) return;
+      const q = DB.quests.find(x=>x.id==qid);
+      document.getElementById('questIcon').src = q.icon || 'https://via.placeholder.com/60';
+
+      const team = [1,2,3,4].map(i=>{
+        const id = document.getElementById('m'+i).value;
+        const m = DB.monsters.find(x=>x.id==id) || {name_zh:"未選擇",icon:"",rec_fruits:[],rec_emblem:[]};
+        document.getElementById('icon'+i).src = m.icon || 'https://via.placeholder.com/60?text=?';
+        return m;
+      });
+
+      let html = `<h2>${q.name} 個別配裝推薦</h2>`;
+      team.forEach((m,i)=>{
+        if (!m.name_zh || m.name_zh==="未選擇") return;
+        html += `
+          <div class="monster card">
+            <img src="${m.icon}" alt="${m.name_zh}">
+            <div>
+              <h3>${m.name_zh}</h3>
+              <p><b>果實推薦：</b><br>
+                <div class="fruits">${(m.rec_fruits||[]).map(f=>`<span>${f}</span>`).join('')}</div>
+              </p>
+              <p><b>紋章推薦：</b><br>
+                <div class="emblems">${(m.rec_emblem||[]).map(e=>`<span>${e}</span>`).join('')}</div>
+              </p>
+            </div>
+          </div>`;
+      });
+      document.getElementById('result').innerHTML = html || "<p>請選擇四隻怪物</p>";
+    }
+
+    load();
+  </script>
+</body>
+</html>
