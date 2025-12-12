@@ -1,41 +1,61 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <title>怪物彈珠配裝計算器</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>怪物彈珠配裝計算器</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#f0f0f0;padding:20px;}
+    select, button{padding:10px;margin:5px;font-size:16px;}
+    #result{background:white;padding:20px;border-radius:10px;margin-top:20px;}
+  </style>
 </head>
 <body>
-    <h1>選擇關卡 & 配隊</h1>
-    <select id="questSel"></select>
-    <div id="teamSel"><!-- 4個怪物選擇 --></div>
-    <button onclick="loadDataAndRecommend()">生成推薦</button>
-    <div id="result"></div>
+  <h1>怪物彈珠高難配隊計算器</h1>
+  <p>選擇關卡 → 選擇四隻角色 → 自動推薦果實與紋章</p>
 
-    <script>
-        let DB = {quests: [], monsters: [], guardians: []};
+  <select id="quest"></select><br>
+  <select id="m1"></select>
+  <select id="m2"></select>
+  <select id="m3"></select>
+  <select id="m4"></select><br>
+  <button onclick="calc()">生成推薦配裝</button>
 
-        async function loadData() {
-            // 從 GitHub 讀最新 JSON（自動更新！）
-            const responses = await Promise.all([
-                fetch('monsters.json').then(r => r.json()),
-                fetch('quests.json').then(r => r.json()),
-                fetch('guardians.json').then(r => r.json())
-            ]);
-            DB.monsters = responses[0];
-            DB.quests = responses[1];
-            DB.guardians = responses[2];
+  <div id="result"></div>
 
-            // 填充下拉選單
-            document.getElementById('questSel').innerHTML = DB.quests.map(q => `<option value="${q.id}">${q.name}</option>`).join('');
-            // ... 加怪物選擇邏輯
-        }
+  <script>
+    let DB = {monsters:[], quests:[], guardians:[]};
 
-        function loadDataAndRecommend() {
-            loadData().then(() => recommend()); // recommend() 用先前邏輯
-        }
+    async function load() {
+      const [m,q,g] = await Promise.all([
+        fetch('monsters.json').then(r=>r.json()),
+        fetch('quests.json').then(r=>r.json()),
+        fetch('guardians.json').then(r=>r.json())
+      ]);
+      DB = {monsters:m, quests:q, guardians:g};
 
-        loadData(); // 頁面載入時自動讀資料
-    </script>
+      document.getElementById('quest').innerHTML = q.map(x=>`<option value="${x.id}">${x.name}</option>`).join('');
+      const opts = m.map(x=>`<option value="${x.id}">${x.name_zh} (${x.attr}${x.type})</option>`).join('');
+      document.querySelectorAll('#m1,#m2,#m3,#m4').forEach(s=>s.innerHTML=opts);
+    }
+
+    function calc() {
+      const qid = document.getElementById('quest').value;
+      const q = DB.quests.find(x=>x.id==qid);
+      const team = [1,2,3,4].map(i=>DB.monsters.find(m=>m.id==document.getElementById('m'+i).value));
+
+      const result = `
+        <h2>${q.name} 推薦配裝</h2>
+        <p><b>屬性：</b>${q.attr}（請全隊統一${q.attr}屬性）</p>
+        <p><b>2果實：</b>同族加擊特L ×2 (+6000 ATK)</p>
+        <p><b>3果實：</b>同族加擊特L ×2 + 同族加擊速特L</p>
+        <p><b>4果實：</b>同族加擊特L ×2 + 加擊速特L + 熱友撃EL</p>
+        <p><b>紋章推薦：</b>對${q.attr}極 ×2 + 對${q.shouha}心得 + 守護獸：${DB.guardians[q.guardian_id-1]?.name || '烈火鮫'}</p>
+      `;
+      document.getElementById('result').innerHTML = result;
+    }
+
+    load();
+  </script>
 </body>
 </html>
