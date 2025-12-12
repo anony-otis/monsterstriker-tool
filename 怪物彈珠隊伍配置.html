@@ -40,7 +40,8 @@
     async function load() {
       const [m,q] = await Promise.all([
         fetch('data/monsters.json').then(r=>r.json()),
-        fetch('data/quests.json').then(r=>r.json())
+        fetch('data/quests.json').then(r=>r.json()),
+        fetch('data/guardians.json').then(r=>r.json())
       ]);
       DB.monsters = m; DB.quests = q;
 
@@ -92,3 +93,4 @@
   </script>
 </body>
 </html>
+
