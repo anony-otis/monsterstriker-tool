@@ -1,0 +1,7 @@
+[
+  {"id":1,"name":"烈火鮫","effect_desc":"ボス2T麻痺","max_effect":{"delay":2,"prob":0.99}},
+  {"id":2,"name":"大賢者","effect_desc":"SS短縮4-8T","max_effect":{"ss_shorten":8}},
+  {"id":3,"name":"守護神獸","effect_desc":"ATK UP 10%","max_effect":{"atk_up":1.1}},
+  {"id":4,"name":"帕克","effect_desc":"全體回血","max_effect":{"heal":5000}},
+  {"id":5,"name":"阿爾比達","effect_desc":"防禦UP","max_effect":{"defense":1.5}}
+]
