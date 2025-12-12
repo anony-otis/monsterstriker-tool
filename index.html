@@ -24,38 +24,65 @@
   <div id="result"></div>
 
   <script>
-    let DB = {monsters:[], quests:[], guardians:[]};
+  let DB = {monsters:[], quests:[], guardians:[]};
 
-    async function load() {
-      const [m,q,g] = await Promise.all([
-        fetch('monsters.json').then(r=>r.json()),
-        fetch('quests.json').then(r=>r.json()),
-        fetch('guardians.json').then(r=>r.json())
-      ]);
-      DB = {monsters:m, quests:q, guardians:g};
+  async function load() {
+    const [m, q, g] = await Promise.all([
+      fetch('monsters.json').then(r => r.json()),
+      fetch('quests.json').then(r => r.json()),
+      fetch('guardians.json').then(r => r.json())
+    ]);
+    DB = {monsters: m, quests: q, guardians: g};
 
-      document.getElementById('quest').innerHTML = q.map(x=>`<option value="${x.id}">${x.name}</option>`).join('');
-      const opts = m.map(x=>`<option value="${x.id}">${x.name_zh} (${x.attr}${x.type})</option>`).join('');
-      document.querySelectorAll('#m1,#m2,#m3,#m4').forEach(s=>s.innerHTML=opts);
-    }
+    // 填充關卡
+    const questSel = document.getElementById('quest');
+    questSel.innerHTML = '<option value="">請選擇關卡</option>' + 
+      q.map(x => `<option value="${x.id}">${x.name}</option>`).join('');
+    questSel.selectedIndex = 1; // 預設選第一個關卡
 
-    function calc() {
-      const qid = document.getElementById('quest').value;
-      const q = DB.quests.find(x=>x.id==qid);
-      const team = [1,2,3,4].map(i=>DB.monsters.find(m=>m.id==document.getElementById('m'+i).value));
+    // 填充四隻怪物的下拉選單
+    const monsterOptions = '<option value="">請選擇怪物</option>' + 
+      m.map(x => `<option value="${x.id}">${x.name_zh} (${x.attr}${x.type})</option>`).join('');
+    document.querySelectorAll('#m1,#m2,#m3,#m4').forEach((sel, i) => {
+      sel.innerHTML = monsterOptions;
+      sel.selectedIndex = (i < 4 ? i + 1 : 1); // 預設前四隻不同怪物
+    });
 
-      const result = `
-        <h2>${q.name} 推薦配裝</h2>
-        <p><b>屬性：</b>${q.attr}（請全隊統一${q.attr}屬性）</p>
-        <p><b>2果實：</b>同族加擊特L ×2 (+6000 ATK)</p>
-        <p><b>3果實：</b>同族加擊特L ×2 + 同族加擊速特L</p>
-        <p><b>4果實：</b>同族加擊特L ×2 + 加擊速特L + 熱友撃EL</p>
-        <p><b>紋章推薦：</b>對${q.attr}極 ×2 + 對${q.shouha}心得 + 守護獸：${DB.guardians[q.guardian_id-1]?.name || '烈火鮫'}</p>
-      `;
-      document.getElementById('result').innerHTML = result;
-    }
+    // 載入完直接顯示一次推薦（可選）
+    setTimeout(calc, 500);
+  }
 
-    load();
-  </script>
+  function calc() {
+    const qid = document.getElementById('quest').value;
+    const mids = [1,2,3,4].map(i => document.getElementById('m'+i).value);
+
+    // 防呆
+    if (!qid) return document.getElementById('result').innerHTML = '<p style="color:red">請先選擇關卡！</p>';
+    if (mids.some(id => !id)) return document.getElementById('result').innerHTML = '<p style="color:red">請把四隻怪物都選好！</p>';
+
+    const q = DB.quests.find(x => x.id == qid);
+    const team = mids.map(id => DB.monsters.find(m => m.id == id));
+
+    const result = `
+      <h2>${q.name} 最佳配裝推薦</h2>
+      <p><b>隊伍：</b>${team.map(m => m.name_zh).join(' → ')}</p>
+      <p><b>屬性統一：</b>${q.attr}屬（傷害最高！）</p>
+      <hr>
+      <p><b>2果實：</b>同族加擊特L ×2 （+6000 ATK）</p>
+      <p><b>3果實：</b>同族加擊特L ×2 + 同族加擊速特L （火力+跑速）</p>
+      <p><b>4果實：</b>同族加擊特L ×2 + 加擊速特L + 熱友撃EL （極限火力）</p>
+      <hr>
+      <p><b>魂紋推薦：</b><br>
+         • 對${q.attr}極 ×2（1.25×1.25＝1.5625倍）<br>
+         • 對${q.shouha}心得（對將/兵傷害+10%）<br>
+         • 守護獸：${DB.guardians.find(g => g.id == q.guardian_id)?.name || '烈火鮫'}</p>
+    `;
+    document.getElementById('result').innerHTML = result;
+  }
+
+  // 頁面載入完成就開始讀資料
+  load();
+</script>
 </body>
 </html>
+
