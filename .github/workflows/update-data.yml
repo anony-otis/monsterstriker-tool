@@ -15,7 +15,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'  # 加快取，加速 npm install
 
       - name: Install system deps for Puppeteer (擴充版)
         run: |
