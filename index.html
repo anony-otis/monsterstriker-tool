@@ -97,10 +97,10 @@
               <h3>${zh}（${i+1}位）</h3>
               <p><b>屬性：</b>${m.attr}　<b>擊種：</b>${m.type_of_shot || '未知'}</p>
               <p><b>種族：</b>${m.race || '未知'}</p>
-              <p class="passive"><b>被動（アビリティ）：</b>
+              <p class="passive"><b>被動：</b>
                 ${(m.passive||[]).map(t=>`<span class="tag">${t}</span>`).join('')}
               </p>
-              <p class="luck"><b>幸運技能（ラックスキル）：</b>
+              <p class="luck"><b>幸運技能：</b>
                 ${(m.luck_skills||[]).map(t=>`<span class="tag">${t}</span>`).join('') || '無'}
               </p>
             </div>
