@@ -1,0 +1,7 @@
+[
+  {"id":1,"name":"ノーピタル【轟絶】","attr":"水","difficulty":"轟","shouha":"將","guardian_id":1,"apt_types":["反射","貫通"]},
+  {"id":2,"name":"ミステリー【爆絶】","attr":"木","difficulty":"爆","shouha":"兵","guardian_id":2,"apt_types":["貫通"]},
+  {"id":3,"name":"迴避的診斷【轟絶】","attr":"水","difficulty":"轟","shouha":"將","guardian_id":3,"apt_types":["反射","貫通"]},
+  {"id":4,"name":"ストラテジー【爆絶】","attr":"火","difficulty":"爆","shouha":"將","guardian_id":4,"apt_types":["反射"]},
+  {"id":5,"name":"レース【爆絶】","attr":"火","difficulty":"爆","shouha":"兵","guardian_id":5,"apt_types":["貫通"]}
+]
