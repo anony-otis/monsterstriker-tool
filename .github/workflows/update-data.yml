@@ -3,7 +3,7 @@ name: 每日更新モンスト資料
 on:
   schedule:
     - cron: '0 17 * * *'  # 台北時間 01:00
-  workflow_dispatch:  # 手動觸發
+  workflow_dispatch:
 
 jobs:
   update:
@@ -16,69 +16,25 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install system deps for Puppeteer (擴充版)
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y \
-            ca-certificates \
-            fonts-liberation \
-            libasound2 \
-            libatk-bridge2.0-0 \
-            libatk1.0-0 \
-            libc6 \
-            libcairo2 \
-            libcups2 \
-            libdbus-1-3 \
-            libexpat1 \
-            libfontconfig1 \
-            libgbm1 \
-            libgcc1 \
-            libglib2.0-0 \
-            libgtk-3-0 \
-            libnspr4 \
-            libnss3 \
-            libpango-1.0-0 \
-            libpangocairo-1.0-0 \
-            libstdc++6 \
-            libx11-6 \
-            libx11-xcb1 \
-            libxcb1 \
-            libxcomposite1 \
-            libxcursor1 \
-            libxdamage1 \
-            libxext6 \
-            libxfixes3 \
-            libxi6 \
-            libxrandr2 \
-            libxrender1 \
-            libxss1 \
-            libxtst6 \
-            lsb-release \
-            wget \
-            xdg-utils \
-            xvfb \
-            gconf-service \
-            libasound2 \
-            libgconf-2-4 \
-            libxss1 \
-            libnss3 \
-            libgconf-2-4  # 額外 Puppeteer 必需品
+      - name: Install Puppeteer (預打包版)
+        uses: browser-actions/setup-puppeteer@v1  # 專用 action，自動裝 deps
+        with:
+          puppeteer-version: '22.0.0'  # 固定版，避免下載問題
 
-      - name: Install npm dependencies
+      - name: Install npm deps & Run scraper
         run: |
           npm init -y
-          npm install puppeteer --no-optional  # 加 --no-optional 避開選配依賴
-          echo "npm install 成功！"
+          npm install puppeteer@22.0.0 --save --no-optional --quiet
+          echo "npm install 完成！開始跑 scraper..."
+          node scraper.js
+        continue-on-error: true
 
-      - name: Run scraper
-        run: node scraper.js
-        continue-on-error: true  # 加這行：即使失敗也繼續（至少產生 fallback JSON）
-
-      - name: Commit and push updates
+      - name: Commit updates
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add *.json || echo "無 JSON 變動"
-          git commit -m "自動更新資料 $(date +'%Y-%m-%d')" || echo "無需 commit"
+          ls -la  # 顯示檔案清單，檢查 JSON 是否產生
+          git add *.json
+          git commit -m "自動更新 $(date +'%Y-%m-%d')" || echo "無變動"
           git push
         continue-on-error: true
