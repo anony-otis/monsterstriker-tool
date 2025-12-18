@@ -1,19 +1,14 @@
 {
   "同族加擊特L": {"type":"同族","effect":"ATK +3000","priority":1,"unique":true},
-  "同族加命擊特L": {"type":"同族","effect":"ATK +2000, HP +2000","priority":2,"unique":true},
-  "同族加擊速特L": {"type":"同族","effect":"ATK +2000 + 速度 +400","priority":3,"unique":true},
+  "同族加擊速特L": {"type":"同族","effect":"ATK +2000 + 速度 +400","priority":2,"unique":true},
   
-  "撃種加擊特L": {"type":"撃種","effect":"ATK +1500","priority":4,"unique":true},
-  "撃種加命擊特L": {"type":"撃種","effect":"ATK +1250, ","priority":5,"unique":true},
-  "撃種加擊速特L": {"type":"撃種","effect":"ATK +1250, HP +1000","priority":6,"unique":true},
+  "撃種加擊特L": {"type":"撃種","effect":"ATK +1500","priority":3,"unique":true},
+  "撃種加擊速特L": {"type":"撃種","effect":"ATK +1250, HP +1000","priority":4,"unique":true},
     
   "戦型加擊特L": {"type":"戦型","effect":"ATK +1500","priority":5,"unique":true},
-  "戦型加擊速特L": {"type":"戦型","effect":"ATK +1250","priority":5,"unique":true},
-  "戦型加命擊特L": {"type":"戦型","effect":"ATK +1250","priority":5,"unique":true},
-  
-  "熱き友撃L": {"type":"友情","effect":"友情威力 +25%","priority":1,"unique":true},
-  
-  "將殺しL": {"type":"將殺","effect":"對將族傷害 +30%","priority":2,"unique":true},
-  "兵殺しL": {"type":"兵殺","effect":"對兵族傷害 +30%","priority":3,"unique":true},
-  "速必殺L": {"type":"速必殺","effect":"速度高時傷害 +20%","priority":4,"unique":true},
-  
+  "戦型加擊速特L": {"type":"戦型","effect":"ATK +1250","priority":6,"unique":true},
+
+  "將殺しL": {"type":"將殺","effect":"對將族傷害 +30%","priority":7,"unique":true},
+  "兵殺しL": {"type":"兵殺","effect":"對兵族傷害 +30%","priority":7,"unique":true},
+  "速必殺L": {"type":"速必殺","effect":"速度高時傷害 +20%","priority":8,"unique":true},
+  "熱き友撃L": {"type":"友情","effect":"友情威力 +25%","priority":8,"unique":true},
